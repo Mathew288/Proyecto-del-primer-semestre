@@ -3,32 +3,52 @@
 #include<ctime>
 #include<conio.h>
 #include<cstdlib>
-using namespace std;          
+#include <windows.h>
+
+using namespace std; 
+         
 const string lineaLarga = "\t______________________________________________________\n\n";
 const string lineaCorta = "--------------";
-short opcionUsuario;
-
+short opcionUsuario; /*variable global donde se almacenará la opcion del usuario*/
+int bip = Beep(150,400);
+const string soloDosDecimales = "\n\n\tLA RESPUESTA DEBE TENER SOLO DOS DECIMALES\n";
+const string respuestaCorrecta = "\n\t¡¡ FELICITACIONES, RESPUESTA CORRECTA !!\n";
 
 short Aleatorio(int A, int B);
 void Bienvenida();
 void Calcualdora();
 void seleccionarDificultad();
 void Opciones();
+void cuentaRegresiva(int minutos);
 
 int main(){
 	setlocale(LC_ALL,"spanish");
 	srand(time(NULL));
 	
-	//cout<<Aleatorio(0,105);
-	
+	system("title Juego/Calculadora de Ley de Ohm");
+	system("color 5f");
+
 	Bienvenida();
 	Opciones();
-
 	
 	getch();
 	return 0;
 }
 
+/*void cuentaRegresiva(int minutos){
+	int ii;
+
+	for(int j=minutos-1 ; j>= 0; j--){
+   		ii = 59;
+ 		for(int i = ii;  i >= 0; i--){
+	  		system("cls");
+  			cout << j << ":" << i << endl;
+ 			cout << "\a";
+  			Sleep(1000);
+ 	}
+ }
+}
+*/
 /*Genera un número aleatorio*/
 short Aleatorio(int A, int B){
 	short numeroAleatorio;
@@ -37,6 +57,7 @@ short Aleatorio(int A, int B){
 }
 
 void Bienvenida(){
+	bip;
 	cout<<lineaLarga;
 	cout<<"\t¡¡ Bienvenido al programa que calcula le Ley de Ohm !!"<<endl;
 	cout<<lineaLarga;
@@ -68,8 +89,61 @@ void Calcualdora(){
 	}
 
 }
+void Ejercicios(){
+	
+	int a = Aleatorio(1,1);
+	float resultado;
+	float respuestaUsuario;
+	int opcionConocerResultado;
+	switch(a){
+		case 1:
+			system("cls");
+			cout<<soloDosDecimales;
+			cout<<endl<<endl;
+			cout<<"\t"<<lineaCorta<<"Ejercicio número 1:"<<lineaCorta<<endl<<endl;
+			cout<<"¿Cuál es la intensidad de la corriente que circula por un conductor de 50 Ohms de resistencia"<<endl;
+			cout<<"cuando en sus extremos se aplica una diferencia de potencial de 120 volts?"<<endl<<endl;
+			cout<<"\nDigite su posible respuesta aquí: ";
+			cin>>respuestaUsuario;
+			resultado = 2.4;
+			
+			if(respuestaUsuario == resultado){
+				cout<<respuestaCorrecta;
+			} else {
+				cout<<"\nUps, respuesta incorrecta.\n\n";
+				cout<<"Presione 1 para conocer el resultado correcto.\n";
+				cout<<"Presione 2 para conocer la respuesta junto con su proceso\n\n";
+				cout<<"Opcion:";
+				cin>>opcionConocerResultado;
+				
+				if(opcionConocerResultado == 1){
+					cout<<"\n\tEl resultado correcto es: "<<resultado;
+				}
+				
+			}
+			break;
+		case 2: 
+		
+			break;
+		case 3:
+			
+			break;
+		case 4:
+			
+			break;
+		case 5: 
+		
+			break;
+		case 6:
+			
+			break;
+		case 7:
+			
+			break;
+	}
+}
 
-void seleccionarDificultad(){
+void menuJuego(){
 	short opcionDificultad;
 	system("cls");
 	cout<<endl;
@@ -81,9 +155,11 @@ void seleccionarDificultad(){
 	cout<<"\tPresione 5 para regresar al menú principal."<<endl<<endl;
 	cout<<"Opción: ";cin>>opcionDificultad;
 	
+	
 	switch(opcionDificultad){
 		case 1:
-			
+				Ejercicios();
+							
 			break;
 		case 2:
 		
@@ -117,9 +193,10 @@ void Opciones(){
 			
 			break;
 		case 2:
-				seleccionarDificultad();		
+				menuJuego();		
 			break;
 		default: 
+			cout<< "\a";
 			string opcionIncorrecta;
 			cout<<"La opción que ha digitado no es correcta, ¿desea intentarlo de nuevo? si/no: "; cin>>opcionIncorrecta;
 			
@@ -137,5 +214,3 @@ void Opciones(){
 	}
 	
 }
-
-
